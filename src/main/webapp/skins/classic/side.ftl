@@ -13,6 +13,7 @@
     </div>
 </div>
 </#if>
+<!--
 <div class="module">
     <div class="module-header">
         <h2>开源项目</h2>
@@ -34,6 +35,7 @@
         </ul>
     </div>
 </div>
+-->
 <#--
 <#if navTrendTags?size!=0>
 <div class="module">
