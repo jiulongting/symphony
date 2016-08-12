@@ -13,8 +13,8 @@
 
                 <div class="fn-right">
                     <span class="ft-gray">&COPY; ${year}</span>
-                    <a rel="copyright" href="https://hacpai.com" target="_blank">hacpai.com</a>
-                    ${visionLabel}</div>
+                    <a rel="copyright" href="${serverHost}" target="_blank">${symphonyLabel}</a>
+                  &nbsp;${serverHost} </div>
             </div>
             <div class="fn-clear">
                 <div class="fn-left info responsive-hide">
