@@ -1309,13 +1309,19 @@ public class UserProcessor {
      * @param response the specified response
      * @throws Exception exception
      */
+    /**数据格式{"userName":"ceshi1",
+    "userEmail":"ceshi@qq.com",
+    "userPassword":"087d5e2738f5e2e68acac694aa2305e8",
+    "clientHost":"1.1.1.1",
+    "userB3Key":" "
+    }*/
     @RequestProcessing(value = "/apis/user", method = HTTPRequestMethod.POST)
     public void syncUser(final HTTPRequestContext context, final HttpServletRequest request, final HttpServletResponse response)
             throws Exception {
+       
         context.renderJSON();
-
-        final JSONObject requestJSONObject = Requests.parseRequestJSONObject(request, response);
-
+      //  final JSONObject requestJSONObject = Requests.parseRequestJSONObject(request, response);
+        final JSONObject requestJSONObject =new JSONObject( request.getParameter("body"));
         final String name = requestJSONObject.optString(User.USER_NAME);
         final String email = requestJSONObject.optString(User.USER_EMAIL);
         final String password = requestJSONObject.optString(User.USER_PASSWORD);
@@ -1350,7 +1356,11 @@ public class UserProcessor {
             user.put(UserExt.USER_B3_CLIENT_UPDATE_ARTICLE_URL, updateArticleURL);
             user.put(UserExt.USER_B3_CLIENT_ADD_COMMENT_URL, addCommentURL);
             user.put(UserExt.USER_STATUS, UserExt.USER_STATUS_C_VALID); // One Move
-
+            //个性化修改userURL
+            user.put("userNickname", requestJSONObject.optString("userNickname"));
+            user.put("userAvatarURL", requestJSONObject.optString("userAvatarURL"));
+            user.put("userURL", requestJSONObject.optString("userURL"));
+            
             try {
                 final String id = userMgmtService.addUser(user);
                 user.put(Keys.OBJECT_ID, id);
