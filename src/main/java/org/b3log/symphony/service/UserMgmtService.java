@@ -466,7 +466,7 @@ public class UserMgmtService {
             user.put(UserExt.USER_APP_ROLE, requestJSONObject.optInt(UserExt.USER_APP_ROLE));
             user.put(User.USER_PASSWORD, requestJSONObject.optString(User.USER_PASSWORD));
             user.put(User.USER_ROLE, requestJSONObject.optString(User.USER_ROLE, Role.DEFAULT_ROLE));
-            user.put(User.USER_URL, "");
+            user.put(User.USER_URL, requestJSONObject.optString(User.USER_URL));
             user.put(UserExt.USER_ARTICLE_COUNT, 0);
             user.put(UserExt.USER_COMMENT_COUNT, 0);
             user.put(UserExt.USER_TAG_COUNT, 0);
@@ -476,7 +476,7 @@ public class UserMgmtService {
             user.put(UserExt.USER_B3_CLIENT_UPDATE_ARTICLE_URL, "");
             user.put(UserExt.USER_B3_CLIENT_ADD_COMMENT_URL, "");
             user.put(UserExt.USER_INTRO, "");
-            user.put(UserExt.USER_NICKNAME, "");
+            user.put(UserExt.USER_NICKNAME, requestJSONObject.optString(UserExt.USER_NICKNAME));
             user.put(UserExt.USER_AVATAR_TYPE, UserExt.USER_AVATAR_TYPE_C_UPLOAD);
             user.put(UserExt.USER_QQ, "");
             user.put(UserExt.USER_ONLINE_FLAG, false);
@@ -588,6 +588,9 @@ public class UserMgmtService {
                     user.put(UserExt.USER_AVATAR_URL, AvatarQueryService.DEFAULT_AVATAR_URL);
                 }
 
+                if(!requestJSONObject.optString(UserExt.USER_AVATAR_URL).equals("")){ 
+                    user.put(UserExt.USER_AVATAR_URL, requestJSONObject.optString(UserExt.USER_AVATAR_URL));
+                }
                 final JSONObject memberCntOption = optionRepository.get(Option.ID_C_STATISTIC_MEMBER_COUNT);
                 final int memberCount = memberCntOption.optInt(Option.OPTION_VALUE) + 1; // Updates stat. (member count +1)
 
